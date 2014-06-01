@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		
+		<title>{% if meta.title %}{{ meta.title }} | {% endif %}{{ site_title }}</title>
+		{% if meta.description %}
+		<meta name="description" content="{{ meta.description }}"> 
+		{% endif %}{% if meta.robots %}
+		<meta name="robots" content="{{ meta.robots }}">
+		{% endif %}
+		
+		<link rel="stylesheet" href="{{ theme_url }}/css/uikit.css" type="text/css" />
+		<link rel="stylesheet" href="{{ theme_url }}/css/style.css" type="text/css" />
+		
+		<!-- Almost Flat style -->
+		{% if uikit_plugin.style == "almost-flat" %}<link rel="stylesheet" href="{{ theme_url }}/css/uikit.almost-flat.min.css" />{% endif %}
+		<!-- Gradient style -->
+		{% if uikit_plugin.style == "gradient" %}<link rel="stylesheet" href="{{ theme_url }}/css/uikit.gradient.min.css" />{% endif %}
+		<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="{{ theme_url }}/js/uikit.js"></script>
+		<script src="{{ theme_url }}/js/addons/sticky.js"></script>
+		<script src="{{ theme_url }}/js/custom.js"></script>
+	</head>
+	<body>
+
+		{% if uikit_plugin.width == "fixed" %}<div class="uk-container uk-container-center">{% endif %}
+			{% include "layout/header_navbar.html" %} 
+		
+		
+		<div id="my-id" class="uk-offcanvas">
+			<div class="uk-offcanvas-bar">
+				<ul class="uk-nav uk-nav-offcanvas uk-nav-parent-icon" data-uk-nav="">
+					<li class="uk-active"><a href="">Home</a></li>
+					<li><a href="">About</a></li>
+					<li><a href="">Contact</a></li>
+					<li class="uk-nav-divider"></li>
+				</ul>
+				<div class="uk-navbar-content">
+					<form method="post" action="">
+						{% if user %}
+						Logged as {{ user }}
+						<input type="submit" name="logout" value="logout" />
+						{% else %}
+						<input type="text" name="login" />
+						<input type="password" name="password" />
+						<input type="submit" value="login" />
+						{% endif %}
+					</form>
+				</div>
+			</div>
+		</div>
+		{% if uikit_plugin.width == 'fixed' %}</div>{% endif %}
+		
+		<br /><br />
+		
+		{% if uikit_plugin.width == 'fixed' %}<div class="uk-container uk-container-center">{% endif %}
+		<div class="uk-grid">
+			{% if meta.sidebar %}
+				{% if meta.sidebar == "None" %}
+					<div class="uk-width-6-6">
+						<article class="uk-article">	
+							{{ content }}
+						</article>
+					</div>
+				{% else %}
+					<div class="uk-width-1-6">
+						{% include meta.sidebar %} 
+					</div>
+					<div class="uk-width-5-6">
+						<article class="uk-article">	
+							{{ content }}
+						</article>
+					</div>
+				{% endif %}
+			{% else %}
+				{% if uikit_plugin.global_sidebar %}
+					<div class="uk-width-1-6">
+						{% include uikit_plugin.global_sidebar %} 
+					</div>
+					<div class="uk-width-5-6">
+						<article class="uk-article">	
+							{{ content }}
+						</article>
+					</div>
+				{% else %}
+					<div class="uk-width-6-6">
+						<article class="uk-article">	
+							{{ content }}
+						</article>
+					</div>
+				{% endif %}
+			{% endif %}
+
+		</div>
+		{% if uikit_plugin.width == 'fixed' %}</div>{% endif %}<!--end div for else statement-->
+		
+		<br /><br />
+		{% if uikit_plugin.width == 'fixed' %}<div class="uk-container uk-container-center">{% endif %}
+		<nav class="uk-navbar uk-navbar-attached" data-uk-sticky>
+			<div class="uk-navbar-content uk-navbar-flip uk-hidden-small">&copy; {{ site_title }} 2014</div>
+		</nav>
+		{% if uikit_plugin.width == 'fixed' %}</div>{% endif %}
+	</body>
+</html>
