@@ -1,133 +1,664 @@
 /*
 Title: Example
 Author: 
-Date: 2014/05/31
-Icon: uk-icon-info
-Subtext: Testing
+Date: 2014/05/29  
+Subtext: Overview
+Icon: uk-icon-file-o
+Navbar_Sticky: No
+Sidebar: None
 */
 
-An h1 header
-============
+<div class="uk-grid">
 
-Paragraphs are separated by a blank line.
+<div class="uk-width-1-1">
 
-2nd paragraph. *Italic*, **bold**, `monospace`. Itemized lists
-look like:
+<nav class="uk-navbar">
 
-  * this one
-  * that one
-  * the other one
+<a class="uk-navbar-brand uk-hidden-small" href="">Brand</a>
 
-Note that --- not considering the asterisk --- the actual text
-content starts at 4-columns in.
+<ul class="uk-navbar-nav uk-hidden-small">
 
-> Block quotes are
-> written like so.
->
-> They can span multiple paragraphs,
-> if you like.
+<li class="uk-parent" data-uk-dropdown>
+<a href="">Parent</a>
+<div class="uk-dropdown uk-dropdown-navbar">
+<ul class="uk-nav uk-nav-navbar">
+<li class="uk-nav-header">Header</li>
+<li><a href="#">Item</a></li>
+<li><a href="#">Item</a></li>
+<li class="uk-nav-divider"></li>
+<li><a href="#">Separated item</a></li>
+<li class="uk-parent">
+<a href="#">Parent</a>
+<ul class="uk-nav-sub">
+<li><a href="#">Sub item</a>
+<ul>
+<li><a href="#">Sub item</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</li>
 
-Use 3 dashes for an em-dash. Use 2 dashes for ranges (ex. "it's all in
-chapters 12--14"). Three dots ... will be converted to an ellipsis.
+<li class="uk-parent uk-active" data-uk-dropdown>
+<a href="">Active</a>
+
+<div class="uk-dropdown uk-dropdown-navbar">
+<div class="uk-panel">Lorem ipsum dolor sit amet, consectetur <a href="#">adipisicing</a> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+</div>
+
+</li>
+</ul>
+
+<a href="#" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas="{target:'#offcanvas-1'}"></a>
+
+</nav>
+</div>
+
+</div>
+
+<hr class="uk-grid-divider">
+
+<div class="uk-grid">
+<div class="uk-width-1-1" data-uk-margin>
+
+<div class="uk-button-group">
+<button class="uk-button">Button</button>
+<div data-uk-dropdown="{mode:'click'}">
+<button class="uk-button"><i class="uk-icon-caret-down"></i></button>
+<div class="uk-dropdown uk-dropdown-width-2">
+
+<div class="uk-grid">
+
+<div class="uk-width-1-2">
+<ul class="uk-nav uk-nav-dropdown uk-panel">
+<li class="uk-nav-header">Header</li>
+<li><a href="#">Item</a></li>
+<li><a href="#">Item</a></li>
+<li class="uk-nav-divider"></li>
+<li><a href="#">Separated item</a></li>
+<li class="uk-parent">
+<a href="#">Parent</a>
+<ul class="uk-nav-sub">
+<li><a href="#">Sub item</a>
+<ul>
+<li><a href="#">Sub item</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+<div class="uk-width-1-2">
+<ul class="uk-nav uk-nav-dropdown uk-panel">
+<li class="uk-nav-header">Header</li>
+<li><a href="#">Item</a></li>
+<li><a href="#">Item</a></li>
+<li class="uk-nav-divider"></li>
+<li><a href="#">Separated item</a></li>
+<li class="uk-parent">
+<a href="#">Parent</a>
+<ul class="uk-nav-sub">
+<li><a href="#">Sub item</a>
+<ul>
+<li><a href="#">Sub item</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="uk-button-group">
+<button class="uk-button uk-button-primary">Primary</button>
+<div data-uk-dropdown="{mode:'click'}">
+<button class="uk-button uk-button-primary"><i class="uk-icon-caret-down"></i></button>
+<div class="uk-dropdown uk-dropdown-small">
+<ul class="uk-nav uk-nav-dropdown">
+<li class="uk-nav-header">Header</li>
+<li><a href="#">Item</a></li>
+<li><a href="#">Item</a></li>
+<li class="uk-nav-divider"></li>
+<li><a href="#">Separated item</a></li>
+<li class="uk-parent">
+<a href="#">Parent</a>
+<ul class="uk-nav-sub">
+<li><a href="#">Sub item</a>
+<ul>
+<li><a href="#">Sub item</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="uk-button-group">
+<button class="uk-button uk-button-success">Success</button>
+<div data-uk-dropdown="{mode:'click'}">
+<button class="uk-button uk-button-success"><i class="uk-icon-caret-down"></i></button>
+<div class="uk-dropdown">
+<ul class="uk-nav uk-nav-dropdown">
+<li class="uk-nav-header">Header</li>
+<li><a href="#">Item</a></li>
+<li><a href="#">Item</a></li>
+<li class="uk-nav-divider"></li>
+<li><a href="#">Separated item</a></li>
+<li class="uk-parent">
+<a href="#">Parent</a>
+<ul class="uk-nav-sub">
+<li><a href="#">Sub item</a>
+<ul>
+<li><a href="#">Sub item</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="uk-button-group">
+<button class="uk-button uk-button-danger">Danger</button>
+<div data-uk-dropdown="{mode:'click'}">
+<button class="uk-button uk-button-danger"><i class="uk-icon-caret-down"></i></button>
+<div class="uk-dropdown">
+<ul class="uk-nav uk-nav-dropdown">
+<li class="uk-nav-header">Header</li>
+<li><a href="#">Item</a></li>
+<li><a href="#">Item</a></li>
+<li class="uk-nav-divider"></li>
+<li><a href="#">Separated item</a></li>
+<li class="uk-parent">
+<a href="#">Parent</a>
+<ul class="uk-nav-sub">
+<li><a href="#">Sub item</a>
+<ul>
+<li><a href="#">Sub item</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<button class="uk-button" disabled>Disabled</button>
+<button class="uk-button" data-uk-tooltip title="Bazinga!">Tooltip</button>
+<button class="uk-button" data-uk-modal="{target:'#modal-1'}">Modal</button>
+<button class="uk-button" data-uk-offcanvas="{target:'#offcanvas-1'}">Off-canvas</button>
+<button class="uk-button uk-button-link">Button link</button>
+
+</div>
+</div>
+
+<hr class="uk-grid-divider">
+
+<div class="uk-grid" data-uk-grid-margin>
+
+<div class="uk-width-medium-1-2">
+
+<div class="uk-grid" data-uk-grid-margin>
+
+<div class="uk-width-1-1">
+<ul class="uk-breadcrumb">
+<li><a href="#">Home</a></li>
+<li><a href="#">Blog</a></li>
+<li><span>Category</span></li>
+<li class="uk-active"><span>Post</span></li>
+</ul>
+</div>
+
+<div class="uk-width-1-1">
+
+<article class="uk-article">
+
+<h1 class="uk-article-title">Article title</h1>
+
+<p class="uk-article-meta">Written by Super User on 12 April. Posted in Blog</p>
+
+<div class="uk-grid" data-uk-grid-margin>
+<div class="uk-width-medium-1-2">
+<a class="uk-thumbnail uk-overlay-toggle" href="#">
+<div class="uk-overlay">
+<img src="holder.js/300x90/auto" alt="">
+<div class="uk-overlay-area"></div>
+</div>
+<div class="uk-thumbnail-caption">Caption</div>
+</a>
+</div>
+
+<div class="uk-width-medium-1-2">
+<a class="uk-thumbnail uk-overlay-toggle" href="#">
+<div class="uk-overlay">
+<img src="holder.js/300x90/auto" alt="">
+<div class="uk-overlay-caption">Caption</div>
+</div>
+<div class="uk-thumbnail-caption">Caption</div>
+</a>
+</div>
+</div>
+
+<p class="uk-article-lead">Lorem ipsum dolor sit amet.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<pre><code><div class="myclass">...</div></code></pre>
+<hr class="uk-article-divider">
+<div class="uk-grid" data-uk-grid-margin>
+
+<div class="uk-width-medium-1-5">
+<span class="uk-text-muted">text-muted</span><br>
+<span class="uk-text-primary">text-primary</span><br>
+<span class="uk-text-success">text-success</span><br>
+<span class="uk-text-warning">text-warning</span><br>
+<span class="uk-text-danger">text-danger</span>
+</div>
+
+<div class="uk-width-medium-3-10">
+<a href="#">a element</a><br>
+<em>em element</em><br>
+<strong>strong</strong><br>
+<code>code element</code><br>
+<del>del element</del>
+</div>
+
+<div class="uk-width-medium-2-5">
+<ins>ins element</ins><br>
+<mark>mark element</mark><br>
+<q>q <q>inside</q> a q element </q><br>
+<abbr title="Abbreviation Element">abbr element</abbr><br>
+<dfn title="Defines a definition term">dfn element</dfn>
+</div>
+
+<div class="uk-width-1-1">
+<p class="uk-text-center">
+<span class="uk-badge">Badge</span>
+<span class="uk-badge uk-badge-notification">1</span>
+<span class="uk-badge uk-badge-success">Success</span>
+<span class="uk-badge uk-badge-success uk-badge-notification">4</span>
+<span class="uk-badge uk-badge-warning">Warning</span>
+<span class="uk-badge uk-badge-warning uk-badge-notification">3</span>
+<span class="uk-badge uk-badge-danger">Danger</span>
+<span class="uk-badge uk-badge-danger uk-badge-notification">4</span>
+</p>
+</div>
+
+<div class="uk-width-medium-1-2">
+<h1 class="uk-display-inline">h1</h1>
+<h2 class="uk-display-inline">h2</h2>
+<h3 class="uk-display-inline">h3</h3>
+<h4 class="uk-display-inline">h4</h4>
+<h5 class="uk-display-inline">h5</h5>
+<h6 class="uk-display-inline">h6</h6>
+</div>
+
+<div class="uk-width-medium-1-2">
+<blockquote>
+<p> Lorem ipsum dolor.</p>
+<small>Someone famous</small>
+</blockquote>
+</div>
+
+</div>
+
+</article>
+
+</div>
+
+<div class="uk-width-1-1">
+<ul class="uk-comment-list">
+<li>
+<article class="uk-comment">
+<header class="uk-comment-header">
+<img class="uk-comment-avatar" src="holder.js/50x50/auto" alt="">
+<h4 class="uk-comment-title">Author</h4>
+<p class="uk-comment-meta">May 2, 2090 at 1:55 pm</p>
+</header>
+<div class="uk-comment-body">
+<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna.</p>
+</div>
+</article>
+</li>
+</ul>
+</div>
+
+<div class="uk-width-1-1">
+<ul class="uk-pagination">
+<li class="uk-disabled"><span><i class="uk-icon-angle-double-left"></i></span></li>
+<li class="uk-active"><span>1</span></li>
+<li><a href="#">2</a></li>
+<li><a href="#">3</a></li>
+<li><a href="#">4</a></li>
+<li><span>...</span></li>
+<li><a href="#">20</a></li>
+<li><a href="#"><i class="uk-icon-angle-double-right"></i></a></li>
+</ul>
+</div>
+
+</div>
+
+</div>
+
+<div class="uk-width-medium-1-2">
+
+<div class="uk-grid" data-uk-grid-margin>
+
+<div class="uk-width-medium-1-2">
+
+<div class="uk-panel">
+<ul class="uk-nav uk-nav-side uk-nav-parent-icon" data-uk-nav>
+<li class="uk-nav-header">Header</li>
+<li class="uk-nav-divider"></li>
+<li class="uk-active"><a href="#">Active</a></li>
+<li class="uk-parent">
+<a href="#">Parent</a>
+<ul class="uk-nav-sub">
+<li><a href="#">Sub item</a></li>
+<li><a href="#">Sub item</a>
+<ul>
+<li><a href="#">Sub item</a></li>
+<li><a href="#">Sub item</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#">Item</a></li>
+</ul>
+</div>
+
+<div class="uk-panel uk-panel-divider">
+<h3 class="uk-panel-title">Divider</h3>
+Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipisicing elit.
+</div>
+
+<div class="uk-panel uk-panel-header">
+<h3 class="uk-panel-title">Header</h3>
+Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipisicing elit.
+</div>
+
+</div>
+
+<div class="uk-width-medium-1-2">
+
+<div class="uk-panel uk-panel-box">
+<h3 class="uk-panel-title">Box</h3>
+Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipisicing elit.
+</div>
+
+<div class="uk-panel uk-panel-box uk-panel-box-primary">
+<h3 class="uk-panel-title">Box primary</h3>
+Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipisicing elit.
+</div>
+
+<div class="uk-panel uk-panel-box uk-panel-box-secondary">
+<h3 class="uk-panel-title">Box secondary</h3>
+Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipisicing elit.
+</div>
+
+</div>
+
+</div>
+
+<div class="uk-grid" data-uk-grid-margin>
+
+<div class="uk-width-1-2">
+<div class="uk-alert" data-uk-alert>
+<a class="uk-alert-close uk-close"></a>
+<p>Info message</p>
+</div>
+</div>
+
+<div class="uk-width-1-2">
+<div class="uk-alert uk-alert-success" data-uk-alert>
+<a class="uk-alert-close uk-close"></a>
+<p>Success message</p>
+</div>
+</div>
+
+<div class="uk-width-1-2">
+<div class="uk-alert uk-alert-warning" data-uk-alert>
+<a class="uk-alert-close uk-close"></a>
+<p>Warning message</p>
+</div>
+</div>
+
+<div class="uk-width-1-2">
+<div class="uk-alert uk-alert-danger" data-uk-alert>
+<a class="uk-alert-close uk-close"></a>
+<p>Danger message</p>
+</div>
+</div>
+
+<div class="uk-width-1-2">
+<div class="uk-progress">
+<div class="uk-progress-bar" style="width: 55%;">55%</div>
+</div>
+</div>
+
+<div class="uk-width-1-2">
+<div class="uk-progress uk-progress-success">
+<div class="uk-progress-bar" style="width: 55%;">55%</div>
+</div>
+</div>
+
+<div class="uk-width-1-2">
+<div class="uk-progress uk-progress-warning">
+<div class="uk-progress-bar" style="width: 55%;">55%</div>
+</div>
+</div>
+
+<div class="uk-width-1-2">
+<div class="uk-progress uk-progress-danger">
+<div class="uk-progress-bar" style="width: 55%;">55%</div>
+</div>
+</div>
+
+<div class="uk-width-1-2">
+<fieldset class="uk-form">
+<legend>Form states</legend>
+<div class="uk-form-row">
+<input type="text" placeholder="Text Input" class="uk-width-1-1">
+</div>
+<div class="uk-form-row">
+<input type="text" placeholder="form-success" value="form-success" class="uk-width-1-1 uk-form-success">
+</div>
+<div class="uk-form-row">
+<input type="text" placeholder="form-danger" value="form-danger" class="uk-width-1-1 uk-form-danger">
+</div>
+<div class="uk-form-row">
+<input type="text" placeholder="form disabled" class="uk-width-1-1" disabled>
+</div>
+</fieldset>
+</div>
+
+<div class="uk-width-1-2">
+<fieldset class="uk-form">
+<legend>Form styles</legend>
+<div class="uk-form-row">
+<input type="text" placeholder="form-large" class="uk-form-large uk-form-width-small">
+<button class="uk-button uk-button-large" type="reset">Large</button>
+</div>
+<div class="uk-form-row">
+<input type="text" placeholder="form-small" class="uk-form-small uk-form-width-small">
+<button class="uk-button uk-button-small" type="reset">Small</button>
+</div>
+<div class="uk-form-row">
+<input type="text" placeholder="form-blank" class="uk-form-width-small uk-form-blank">
+<button class="uk-button uk-button-mini" type="reset">Mini</button>
+</div>
+</fieldset>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<hr class="uk-grid-divider">
+
+<div class="uk-grid" data-uk-grid-margin>
+
+<div class="uk-width-medium-1-4">
+
+<ul class="uk-subnav uk-subnav-line">
+<li class="uk-active"><a href="#">Active</a></li>
+<li><a href="#">Item</a></li>
+<li><span>Disabled</span></li>
+</ul>
+
+</div>
+<div class="uk-width-medium-1-4">
+
+<ul class="uk-subnav uk-subnav-pill">
+<li class="uk-active"><a href="#">Active</a></li>
+<li><a href="#">Item</a></li>
+<li><span>Disabled</span></li>
+</ul>
+
+</div>
+<div class="uk-width-medium-1-4">
+
+<ul class="uk-tab" data-uk-tab>
+<li class="uk-active"><a href="#">Active</a></li>
+<li><a href="#">Item</a></li>
+<li class="uk-disabled"><a href="#">Disabled</a></li>
+</ul>
+
+</div>
+<div class="uk-width-medium-1-4">
+
+<a href="#" class="uk-icon-button uk-icon-github"></a>
+<a href="#" class="uk-icon-button uk-icon-twitter"></a>
+<a href="#" class="uk-icon-button uk-icon-dribbble"></a>
+<a href="#" class="uk-icon-button uk-icon-html5"></a>
+
+</div>
+</div>
+
+<hr class="uk-grid-divider">
+
+<div class="uk-grid uk-grid-divider" data-uk-grid-margin>
+<div class="uk-width-medium-1-4">
+
+<ul class="uk-list uk-list-line">
+<li>List item 1</li>
+<li>List item 2</li>
+<li>List item 3</li>
+</ul>
+
+</div>
+
+<div class="uk-width-medium-1-4">
+
+<ul class="uk-list uk-list-striped">
+<li>List item 1</li>
+<li>List item 2</li>
+<li>List item 3</li>
+</ul>
+
+</div>
+<div class="uk-width-medium-1-4">
+
+<table class="uk-table uk-table-striped uk-table-condensed uk-table-hover">
+<caption>Table caption</caption>
+<thead>
+<tr>
+<th>Table</th>
+<th>Heading</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Table</td>
+<td>Data</td>
+</tr>
+<tr>
+<td>Table</td>
+<td>Data</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+<div class="uk-width-medium-1-4">
+
+<dl class="uk-description-list uk-description-list-line">
+<dt>Description lists</dt>
+<dd>Description text.</dd>
+<dt>Description lists</dt>
+<dd>Description text.</dd>
+</dl>
+
+</div>
+</div>
 
 
+<div id="offcanvas-1" class="uk-offcanvas">
+<div class="uk-offcanvas-bar">
 
-An h2 header
-------------
+<ul class="uk-nav uk-nav-offcanvas uk-nav-parent-icon" data-uk-nav>
+<li><a href="#">Item</a></li>
+<li class="uk-active"><a href="#">Active</a></li>
 
-Here's a numbered list:
+<li class="uk-parent">
+<a href="#">Parent</a>
+<ul class="uk-nav-sub">
+<li><a href="#">Sub item</a></li>
+<li><a href="#">Sub item</a>
+<ul>
+<li><a href="#">Sub item</a></li>
+<li><a href="#">Sub item</a></li>
+</ul>
+</li>
+</ul>
+</li>
 
- 1. first item
- 2. second item
- 3. third item
+<li class="uk-parent">
+<a href="#">Parent</a>
+<ul class="uk-nav-sub">
+<li><a href="#">Sub item</a></li>
+<li><a href="#">Sub item</a></li>
+</ul>
+</li>
 
-Note again how the actual text starts at 4 columns in (4 characters
-from the left side). Here's a code sample:
+<li><a href="#">Item</a></li>
 
-    # Let me re-iterate ...
-    for i in 1 .. 10 { do-something(i) }
+<li class="uk-nav-header">Header</li>
+<li><a href="#"><i class="uk-icon-star"></i> Item</a></li>
+<li><a href="#"><i class="uk-icon-twitter"></i> Item</a></li>
+<li class="uk-nav-divider"></li>
+<li><a href="#"><i class="uk-icon-rss"></i> Item</a></li>
+</ul>
 
-As you probably guessed, indented 4 spaces. By the way, instead of
-indenting the block, you can use delimited blocks, if you like:
+<div class="uk-panel">
+<h3 class="uk-panel-title">Title</h3>
+Lorem ipsum dolor sit amet, <a href="#">consetetur</a> sadipscing elitr.
+</div>
 
-~~~
-define foobar() {
-    print "Welcome to flavor country!";
-}
-~~~
+<div class="uk-panel">
+<h3 class="uk-panel-title">Title</h3>
+Lorem ipsum dolor sit amet, <a href="#">consetetur</a> sadipscing elitr.
+</div>
 
-(which makes copying & pasting easier). You can optionally mark the
-delimited block for Pandoc to syntax highlight it:
+</div>
+</div>
 
-~~~python
-import time
-# Quick, count to ten!
-for i in range(10):
-    # (but not *too* quick)
-    time.sleep(0.5)
-    print i
-~~~
-
-
-
-### An h3 header ###
-
-Now a nested list:
-
- 1. First, get these ingredients:
-
-      * carrots
-      * celery
-      * lentils
-
- 2. Boil some water.
-
- 3. Dump everything in the pot and follow
-    this algorithm:
-
-        find wooden spoon
-        uncover pot
-        stir
-        cover pot
-        balance wooden spoon precariously on pot handle
-        wait 10 minutes
-        goto first step (or shut off burner when done)
-
-    Do not bump wooden spoon or it will fall.
-
-Notice again how text always lines up on 4-space indents (including
-that last line which continues item 3 above). Here's a link to [a
-website](http://foo.bar). Here's a link to a [local
-doc](local-doc.html). Here's a footnote [^1].
-
-[^1]: Footnote text goes here.
-
-Tables can look like this:
-
-size  material      color
-----  ------------  ------------
-9     leather       brown
-10    hemp canvas   natural
-11    glass         transparent
-
-Table: Shoes, their sizes, and what they're made of
-
-(The above is the caption for the table.) Here's a definition list:
-
-apples
-  : Good for making applesauce.
-oranges
-  : Citrus!
-tomatoes
-  : There's no "e" in tomatoe.
-
-Again, text is indented 4 spaces. (Alternately, put blank lines in
-between each of the above definition list lines to spread things
-out more.)
-
-Inline math equations go in like so: $\omega = d\phi / dt$. Display
-math should get its own line and be put in in double-dollarsigns:
-
-$$I = \int \rho R^{2} dV$$
-
-Done.
+<div id="modal-1" class="uk-modal">
+<div class="uk-modal-dialog">
+<button type="button" class="uk-modal-close uk-close"></button>
+<h1>Headline</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>
+</div>

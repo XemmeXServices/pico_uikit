@@ -4,7 +4,8 @@ Author:
 Date: 2014/05/28
 Subtext: to Pico
 Icon: uk-icon-github-square
-Sidebar: layout/welcome_sidebar.html
+Sidebar_Source: layout/welcome_sidebar.html
+Sidebar: Right
 */
 
 ## Welcome to Pico

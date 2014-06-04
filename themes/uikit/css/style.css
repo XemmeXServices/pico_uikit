@@ -282,3 +282,11 @@ blockquote {
 .uk-navbar {
 z-index: 4000
 }
+
+#bottom-wrapper {
+    bottom: 0;
+	position: fixed;
+}
+#bottom-nav {
+
+}
