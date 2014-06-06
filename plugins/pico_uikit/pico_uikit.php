@@ -1,22 +1,30 @@
 <?php
-
+	global $search_field;
+	if ((isset($_REQUEST['search'])) && (!empty($_REQUEST['search'])))
+	{
+		$search_field = $_REQUEST['search'];
+		$class_pico_uikit = new pico_uikit();
+		$search_list = $class_pico_uikit->get_search_results($search_field);
+		echo $search_list;
+	}
 /**
  * Plugin to make proper use of UI KIT by YooTheme
  *
  * @author Daniel James
- * @link http://github.com
+ * @link https://github.com/khanduras/pico_uikit
  * @license http://opensource.org/licenses/MIT
  */
 class pico_uikit {	
 	##
 	# VARS
 	##
+	private $plugin_path;
 	private $settings = array();
 	private $navigation = array();
+	
 	##
 	# HOOKS
-	##
-	
+	##	
 
 	public function config_loaded(&$settings)
 	{
@@ -30,12 +38,15 @@ class pico_uikit {
 		if (!isset($this->settings['uikit']['class_li'])) { $this->settings['uikit']['class_li'] = 'li-item'; }
 		if (!isset($this->settings['uikit']['class_a'])) { $this->settings['uikit']['class_a'] = 'a-item'; }
 		
-		//default styles
+		//default paramiters
 		if (!isset($this->settings['uikit']['width'])) { $this->settings['uikit']['width'] = 'fluid'; }
-		if (!isset($this->settings['uikit']['style'])) { $this->settings['uikit']['style'] = ''; }
-		if (!isset($this->settings['uikit']['global_navbar_sticky'])) { $this->settings['uikit']['global_navbar_sticky'] = ''; }
+		if (!isset($this->settings['uikit']['style'])) { $this->settings['uikit']['style'] = 'gradient'; }
+		if (!isset($this->settings['uikit']['global_navbar_sticky'])) { $this->settings['uikit']['global_navbar_sticky'] = '{top:0}'; }
 		if (!isset($this->settings['uikit']['global_sidebar'])) { $this->settings['uikit']['global_sidebar'] = 'Left'; }
 		if (!isset($this->settings['uikit']['global_sidebar_source'])) { $this->settings['uikit']['global_sidebar_source'] = 'layout/main_sidebar.html'; }
+		if (!isset($this->settings['uikit']['global_navbar_source'])) { $this->settings['uikit']['global_navbar_source'] = 'layout/main_navbar.html'; }
+		if (!isset($this->settings['uikit']['global_footer_source'])) { $this->settings['uikit']['global_footer_source'] = 'layout/main_footer.html'; }
+		if (!isset($this->settings['uikit']['global_content_source'])) { $this->settings['uikit']['global_content_source'] = 'layout/main_content.html'; }
 		
 		// default excludes
 		$this->settings['uikit']['exclude'] = array_merge_recursive(
@@ -52,6 +63,10 @@ class pico_uikit {
 		$twig_vars['uikit']['global_navbar_sticky'] = $this->settings['uikit']['global_navbar_sticky'];
 		$twig_vars['uikit']['global_sidebar'] = $this->settings['uikit']['global_sidebar'];
 		$twig_vars['uikit']['global_sidebar_source'] = $this->settings['uikit']['global_sidebar_source'];
+		$twig_vars['uikit']['global_navbar_source'] = $this->settings['uikit']['global_navbar_source'];
+		$twig_vars['uikit']['global_footer_source'] = $this->settings['uikit']['global_footer_source'];
+		$twig_vars['uikit']['global_content_source'] = $this->settings['uikit']['global_content_source'];
+		$twig_vars['uikit']['search_results'] = $this->return_uikit();
 	}
 	
 	public function before_read_file_meta(&$headers) {
@@ -60,6 +75,8 @@ class pico_uikit {
 		$headers["navbar_sticky"] = "Navbar_Sticky";
 		$headers["sidebar"] = "Sidebar";
 		$headers["sidebar_source"] = "Sidebar_Source";
+		$headers["navbar_source"] = "Navbar_Source";
+		$headers["footer_source"] = "Footer_Source";
 		
 	}
 	
@@ -82,7 +99,7 @@ class pico_uikit {
 				$navigation = array_merge_recursive($navigation, $this->nav_recursive($_split, $page, $current_page));
 			}
 		}
-		
+				
 		array_multisort($navigation);
 
 		$this->navigation = $navigation;
@@ -214,5 +231,81 @@ class pico_uikit {
 			return array('_child' => array($first => $this->nav_recursive($split, $page, $current_page)));
 		}
 	}
+	//Has to return a url, either json or php
+	private function return_uikit() 
+	{
+		//$search_list= file_get_contents("uikit_search.json");
+		
+		// ob_start(); // turn on output buffering
+			// echo include("uikit_search.json");
+			// //echo ob_get_contents(); // get the contents of the output buffer
+		// ob_get_clean(); //  clean (erase) the output buffer and turn off output buffering
+		
+		// $jsonIterator = new RecursiveIteratorIterator(
+			// new RecursiveArrayIterator(json_decode($search_list, TRUE)),
+			// RecursiveIteratorIterator::SELF_FIRST);
+			
+		// foreach ($jsonIterator as $key => $val) {
+			// if(is_array($val)) {
+				// echo "$key:\n";
+			// } else {
+				// echo "$key => $val\n";
+			// }
+		// }
+		
+		//($this->plugin_path .'
+
+		
+		return '/pico_uikit/plugins/pico_uikit/pico_uikit.php';
+			
+		// $json = json_encode(array(
+			// "results" => array(
+				// array(
+					// "title" => "Google",
+					// "url" => "http://google.com",
+					// "text" => "A large search engine"),
+				// array(
+					// "title" => "Microsoft",
+					// "url" => "http://microsoft.com",
+					// "text" => "Devices and Services company"),
+				// array(
+					// "title" => "Apple",
+					// "url" => "http://apple.com",
+					// "text" => "iPad, iPhone, Mac, iOS"),
+				// array(
+					// "title" => "IBM",
+					// "url" => "http://ibm.com",
+					// "text" => "Innovators of hardware and software")
+			// )
+		// ));
+		// return $json;
+	}
+	public function get_search_results($search_field)
+	{
+		$json = array(
+			"results" => array(
+				array(
+					"title" => "Google",
+					"url" => "http://google.com",
+					"text" => "A large search engine"),
+				array(
+					"title" => "Microsoft",
+					"url" => "http://microsoft.com",
+					"text" => "Devices and Services company"),
+				array(
+					"title" => "Apple",
+					"url" => "http://apple.com",
+					"text" => "iPad, iPhone, Mac, iOS"),
+				array(
+					"title" => "IBM",
+					"url" => "http://ibm.com",
+					"text" => "Innovators of hardware and software")
+			)
+		);
+		
+		return json_encode($json);
+		//return file_get_contents('uikit_search.json');
+	}
+
 }
 ?>

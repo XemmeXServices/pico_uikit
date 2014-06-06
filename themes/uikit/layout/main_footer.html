@@ -1,12 +1,15 @@
+				
 {% if uikit.width == 'fixed' %}<div class="uk-container uk-container-center">{% endif %}
 <nav class="uk-navbar {% if uikit.width == 'fluid' %}uk-navbar-attached{% endif %}">
-	<div class="uk-navbar-content">
-			<form method="post" action="" class="uk-form uk-margin-remove uk-display-inline-block">
-				<input type="text" name="login" placeholder="Login" />
-				<input type="password" name="password" placeholder="Password" />
-				<button type="submit" class="uk-button uk-button-primary">Login</button>
-			</form>
-	</div>
-	<div class="uk-navbar-content uk-navbar-flip uk-hidden-small">&copy; {{ site_title }} 2014</div>
+
+				<div class="uk-navbar-content">
+						<form method="post" action="" class="uk-form uk-margin-remove uk-display-inline-block">
+							<input class="uk-form-small" type="text" name="login" placeholder="Login" />
+							<input class="uk-form-small" type="password" name="password" placeholder="Password" />
+							<button type="submit" class="uk-button uk-button-primary uk-button-small">Login</button>
+						</form>
+				</div>
+				<div class="uk-navbar-content uk-navbar-flip uk-hidden-small">&copy; {{ site_title }} 2014</div>
+
 </nav>
 {% if uikit.width == 'fixed' %}</div>{% endif %}

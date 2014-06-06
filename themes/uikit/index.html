@@ -13,22 +13,42 @@
 		<link rel="stylesheet" href="{{ theme_url }}/css/uikit.css" type="text/css" />
 		<link rel="stylesheet" href="{{ theme_url }}/css/addons/uikit.addons.css" type="text/css" />
 		<link rel="stylesheet" href="{{ theme_url }}/css/style.css" type="text/css" />
-		
 		<!-- Almost Flat style -->
 		{% if uikit.style == "almost-flat" %}<link rel="stylesheet" href="{{ theme_url }}/css/uikit.almost-flat.min.css" />{% endif %}
+		{% if uikit.style == "almost-flat" %}<link rel="stylesheet" href="{{ theme_url }}/css/addons/uikit.almost-flat.addons.css" type="text/css" />{% endif %}
 		<!-- Gradient style -->
 		{% if uikit.style == "gradient" %}<link rel="stylesheet" href="{{ theme_url }}/css/uikit.gradient.min.css" />{% endif %}
+		{% if uikit.style == "gradient" %}<link rel="stylesheet" href="{{ theme_url }}/css/addons/uikit.gradient.addons.css" type="text/css" />{% endif %}
+		
 		<script src="{{ theme_url }}/js/jquery-1.11.1.js"></script>
 		<script src="{{ theme_url }}/js/uikit.js"></script>
 		<script src="{{ theme_url }}/js/addons/sticky.js"></script>
-		<script src="{{ theme_url }}/js/custom.js"></script>
+		<script src="{{ theme_url }}/js/addons/search.js"></script>
         <script src="{{ theme_url }}/js/addons/autocomplete.js"></script>
-        <script src="{{ theme_url }}/js/addons/search.js"></script>
+		<script src="{{ theme_url }}/js/custom.js"></script>
 	</head>
 	<body>
 
 		{% if uikit.width == "fixed" %}<div class="uk-container uk-container-center">{% endif %}
-			{% include "layout/header_navbar.html" %} 
+		
+		{% if meta.navbar_sticky == "No" %}
+			<nav class="uk-navbar {% if uikit.width == 'fluid' %}uk-navbar-attached{% endif %}">
+		{% else %}
+			{% if uikit.global_navbar_sticky == "Yes" %}
+				<nav class="uk-navbar {% if uikit.width == 'fluid' %}uk-navbar-attached{% endif %}" data-uk-sticky={{ uikit.global_navbar_sticky }} >
+			{% else %}
+				<nav class="uk-navbar {% if uikit.width == 'fluid' %}uk-navbar-attached{% endif %}" data-uk-sticky={{ meta.navbar_sticky }} >
+			{% endif %}
+		{% endif %}
+
+		{% if meta.navbar_source %}
+			{% include meta.navbar_source %}
+		{% else %}
+			{% include uikit.global_navbar_source %} 
+		{% endif %}
+			
+		</nav>
+			
 		
 		
 		<div id="my-id" class="uk-offcanvas">
@@ -62,15 +82,11 @@
 			{% if meta.sidebar %}
 				{% if meta.sidebar == "None" %}
 					<div class="uk-width-6-6">
-						<article class="uk-article">	
-							{{ content }}
-						</article>
+						{% include uikit.global_content_source %}
 					</div>
 				{% elseif meta.sidebar == "Right" %}
 					<div class="uk-width-5-6">
-						<article class="uk-article">	
-							{{ content }}
-						</article>
+						{% include uikit.global_content_source %}
 					</div>
 					<div class="uk-width-1-6">
 						{% if meta.sidebar_source %}
@@ -88,35 +104,35 @@
 						{% endif %} 
 					</div>
 					<div class="uk-width-5-6">
-						<article class="uk-article">	
-							{{ content }}
-						</article>
+						{% include uikit.global_content_source %}
 					</div>
 				{% endif %}
 			{% else %}
 				{% if uikit.global_sidebar == "Left" %}
 					<div class="uk-width-1-6">
-						{% include uikit.global_sidebar_source %} 
+						{% if meta.sidebar_source %}
+							{% include meta.sidebar_source %} 
+						{% else %}
+							{% include uikit.global_sidebar_source %}
+						{% endif %} 
 					</div>
 					<div class="uk-width-5-6">
-						<article class="uk-article">	
-							{{ content }}
-						</article>
+						{% include uikit.global_content_source %}
 					</div>
 				{% elseif uikit.global_sidebar == "Right" %}
 					<div class="uk-width-5-6">
-						<article class="uk-article">	
-							{{ content }}
-						</article>
+						{% include uikit.global_content_source %}
 					</div>
 					<div class="uk-width-1-6">
-						{% include uikit.global_sidebar_source %} 
+						{% if meta.sidebar_source %}
+							{% include meta.sidebar_source %} 
+						{% else %}
+							{% include uikit.global_sidebar_source %}
+						{% endif %} 
 					</div>
 				{% else %}
 					<div class="uk-width-6-6">
-						<article class="uk-article">	
-							{{ content }}
-						</article>
+						{% include uikit.global_content_source %}
 					</div>
 				{% endif %}
 			{% endif %}
@@ -128,7 +144,12 @@
 		
 		<br /><br />
 		
-		{% include "layout/main_footer.html" %}
+		{% if meta.footbar_source %}
+			{% include meta.footbar_source %}
+		{% else %}
+			{% include uikit.global_footer_source %}
+		{% endif %}
+		
 		
 	</body>
 </html>

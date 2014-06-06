@@ -4,7 +4,6 @@ Author:
 Date: 2014/05/29  
 Subtext: Overview
 Icon: uk-icon-file-o
-Navbar_Sticky: No
 Sidebar: None
 */
 

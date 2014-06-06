@@ -64,7 +64,7 @@
                         s.stickyElement.css('width', $(s.getWidthFrom).width());
                     }
 
-                    s.stickyElement.parent().addClass(s.clsactive);
+                    //s.stickyElement.parent().addClass(s.clsactive);
                     s.currentTop = newTop;
                 }
             }
@@ -107,7 +107,7 @@
               stickyElement: stickyElement,
               currentTop: null,
               stickyWrapper: stickyWrapper,
-              clsactive: o.clsactive,
+              //clsactive: o.clsactive,
               getWidthFrom: o.getWidthFrom
             });
           });

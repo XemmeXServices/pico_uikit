@@ -1,0 +1,24 @@
+{
+    "results": [
+        {
+            "title": "Google",
+            "url": "http://google.com",
+            "text": "A large search engine"
+        },
+        {
+            "title": "Microsoft",
+            "url": "http://microsoft.com",
+            "text": "Devices and Services company"
+        },
+        {
+            "title": "Apple",
+            "url": "http://apple.com",
+            "text": "iPad, iPhone, Mac, iOS"
+        },
+        {
+            "title": "IBM",
+            "url": "http://ibm.com",
+            "text": "Innovators of hardware and software"
+        }
+    ]
+}
