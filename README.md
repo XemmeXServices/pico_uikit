@@ -1,4 +1,4 @@
-#UI Kit Theme for Pico CMS
+#Pico UI Kit (PUIK) Framework
 
 UI Kit is a "A lightweight and modular front-end framework
 for developing fast and powerful web interfaces." [UI Kit](http://getuikit.com/)
@@ -10,6 +10,7 @@ Pico CMS is "A stupidly simple & blazing fast, flat file CMS." [Pico CMS](http:/
  * UI Kit theme, fluid or fixed width, based primarily on [Fluid UI Kit Theme](https://github.com/nands/uikit-fluid-layout).
  * Navigation bar that updates with active page, icons and subtext, editable with a layout file, based primarily on [Pico Navigation](https://github.com/ahmet2106/pico-navigation).
  * Sidebar that is customizable per page as it can be on the left or right or disabled and is editable with a layout file.
+ * Search functionality - basic search
 
 ## Theme & Plugin
 
@@ -52,7 +53,7 @@ Some meta data can be set per page which will change how the page will display o
 
 ## Ambitions
 
- * Complete the navbar to include the dropdown menu from UI Kit, pulling from subpages.
+ * Complete the navbar to include the dropdown menu from UI Kit, pulling from subpages. Works for one submenu.
  * Complete the sidebar navigation to pull from pages/subpages.
  * Sticky Footer
  * Create a front-end editor using off-canvas and [Markdown Editor](http://getuikit.com/docs/addons_markdownarea.html), incorporating user roles and rights from [Pico Users](https://github.com/nliautaud/pico-users)
