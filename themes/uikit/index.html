@@ -9,16 +9,17 @@
 		{% endif %}{% if meta.robots %}
 		<meta name="robots" content="{{ meta.robots }}">
 		{% endif %}
+		<!-- <link rel="stylesheet" href="{{ base_url }}/plugins/pico_editor/pico_editor.css" type="text/css" /> -->
 		
 		<link rel="stylesheet" href="{{ theme_url }}/css/uikit.css" type="text/css" />
 		<link rel="stylesheet" href="{{ theme_url }}/css/addons/uikit.addons.css" type="text/css" />
 		<link rel="stylesheet" href="{{ theme_url }}/css/style.css" type="text/css" />
 		<!-- Almost Flat style -->
-		{% if uikit.style == "almost-flat" %}<link rel="stylesheet" href="{{ theme_url }}/css/uikit.almost-flat.min.css" />{% endif %}
-		{% if uikit.style == "almost-flat" %}<link rel="stylesheet" href="{{ theme_url }}/css/addons/uikit.almost-flat.addons.css" type="text/css" />{% endif %}
+		{% if puik.style == "almost-flat" %}<link rel="stylesheet" href="{{ theme_url }}/css/uikit.almost-flat.min.css" />{% endif %}
+		{% if puik.style == "almost-flat" %}<link rel="stylesheet" href="{{ theme_url }}/css/addons/uikit.almost-flat.addons.css" type="text/css" />{% endif %}
 		<!-- Gradient style -->
-		{% if uikit.style == "gradient" %}<link rel="stylesheet" href="{{ theme_url }}/css/uikit.gradient.min.css" />{% endif %}
-		{% if uikit.style == "gradient" %}<link rel="stylesheet" href="{{ theme_url }}/css/addons/uikit.gradient.addons.css" type="text/css" />{% endif %}
+		{% if puik.style == "gradient" %}<link rel="stylesheet" href="{{ theme_url }}/css/uikit.gradient.min.css" />{% endif %}
+		{% if puik.style == "gradient" %}<link rel="stylesheet" href="{{ theme_url }}/css/addons/uikit.gradient.addons.css" type="text/css" />{% endif %}
 		
 		<script src="{{ theme_url }}/js/jquery-1.11.1.js"></script>
 		<script src="{{ theme_url }}/js/uikit.js"></script>
@@ -26,25 +27,142 @@
 		<script src="{{ theme_url }}/js/addons/search.js"></script>
         <script src="{{ theme_url }}/js/addons/autocomplete.js"></script>
 		<script src="{{ theme_url }}/js/custom.js"></script>
+		
+	 <!--------------------------------------------------------------------------------------------->
+	    <script src="{{ base_url }}/plugins/puik/editor/assets/js/epiceditor.min.js"></script>
+	    <script>
+	    $(document).ready(function() {
+	    
+	    	var unsaved = false;
+		    var editor = new EpicEditor({
+				container: 'epiceditor',
+				basePath: '{{ base_url }}/plugins/puik/editor/assets',
+				clientSideStorage: false,
+				file: {
+					name: 'epiceditor',
+					defaultContent: '',
+					autoSave: 5000
+				},
+				theme: {
+					base: '{{ base_url }}/plugins/puik/editor/assets/themes/base/epiceditor.css',
+					preview: '{{ base_url }}/plugins/puik/editor/assets/themes/preview/github.css',
+					editor: '{{ base_url }}/plugins/puik/editor/assets/themes/editor/epic-light.css'
+				},
+				button: {
+					preview: true,
+					fullscreen: false
+				},
+				focusOnLoad: true
+			}).load();
+			
+			$(editor.getElement('editor')).on('keyup', function (){
+				if(!unsaved){
+					unsaved = true;
+					document.title += ' *';
+				}
+			});
+			
+			// New
+			$('.controls .new').on('click', function(e){
+				e.preventDefault();
+				var title = prompt('Please enter a post title', '');
+				if(title != null && title != ''){
+					$.post('admin/new', { title: title }, function(data){
+						if(data.error){
+							alert(data.error);
+						} else {
+							$('.nav .post').removeClass('open');
+							$('#epiceditor').data('currentFile', data.file);
+							editor.importFile('epiceditor', data.content);
+							unsaved = false;
+							document.title = document.title.replace(' *', '');
+							$('.nav').prepend('<li><a href="#" data-url="{{ base_url }}/'+ data.file +'" class="post open"><span data-icon="3" aria-hidden="true"></span>'+ data.title +'</a><a href="{{ base_url }}/'+ data.file +'" target="_blank" class="view" title="View">5</a><a href="#" data-url="{{ base_url }}/'+ data.file +'" class="delete" title="Delete">4</a></li>')
+						}
+					}, 'json');
+				}
+			});
+			
+			// Open post
+			$('.nav').on('click', '.post', function(e){
+				e.preventDefault();
+				if(unsaved && !confirm('You have unsaved changes. Are you sure you want to leave this post?')) return false;
+				$('.nav .post').removeClass('open');
+				$(this).addClass('open');
+				
+				var fileUrl = $(this).attr('data-url');
+				$.post('admin/open', { file: fileUrl }, function(data){
+					$('#epiceditor').data('currentFile', fileUrl);
+					editor.importFile('epiceditor', data);
+					unsaved = false;
+					document.title = document.title.replace(' *', '');
+				});
+			});
+			
+			// Save post
+			editor.on('autosave', function () {
+				$('#saving').text('Saving...').addClass('active');
+				$.post('admin/save', { file: $('#epiceditor').data('currentFile'), content: editor.exportFile() }, function(data){
+					$('#saving').text('Saved');
+					unsaved = false;
+					document.title = document.title.replace(' *', '');
+					setTimeout(function(){
+						$('#saving').removeClass('active');
+					}, 1000);
+				});
+			});
+			
+			// Save on preview
+			editor.on('preview', function () {
+				editor.emit('autosave');
+			});
+			
+			// Delete post
+			$('.nav').on('click', '.delete', function(e){
+				e.preventDefault();
+				if(!confirm('Are you sure you want to delete this file?')) return false;
+				$('.nav .post').removeClass('open');
+				
+				var li = $(this).parents('li');
+				var fileUrl = $(this).attr('data-url');
+				$.post('admin/delete', { file: fileUrl }, function(data){
+					li.remove();
+					$('#epiceditor').data('currentFile', '');
+					editor.importFile('epiceditor', '');
+					unsaved = false;
+					document.title = document.title.replace(' *', '');
+				});
+			});
+			
+			// Window resize
+			$('body,#main,#epiceditor').height($(window).height());
+			$(window).resize(function() {
+				$('body,#main,#epiceditor').height($(window).height());
+				editor.reflow();
+			});
+			
+		});
+	    </script>
+	
+	<!----------------------------------------------------------------------->
 	</head>
 	<body>
 
-		{% if uikit.width == "fixed" %}<div class="uk-container uk-container-center">{% endif %}
+		{% if puik.width == "fixed" %}<div class="uk-container uk-container-center">{% endif %}
 		
 		{% if meta.navbar_sticky == "No" %}
-			<nav class="uk-navbar {% if uikit.width == 'fluid' %}uk-navbar-attached{% endif %}">
+			<nav class="uk-navbar {% if puik.width == 'fluid' %}uk-navbar-attached{% endif %}">
 		{% else %}
-			{% if uikit.global_navbar_sticky == "Yes" %}
-				<nav class="uk-navbar {% if uikit.width == 'fluid' %}uk-navbar-attached{% endif %}" data-uk-sticky={{ uikit.global_navbar_sticky }} >
+			{% if puik.global_navbar_sticky == "Yes" %}
+				<nav class="uk-navbar {% if puik.width == 'fluid' %}uk-navbar-attached{% endif %}" data-uk-sticky={{ puik.global_navbar_sticky }} >
 			{% else %}
-				<nav class="uk-navbar {% if uikit.width == 'fluid' %}uk-navbar-attached{% endif %}" data-uk-sticky={{ meta.navbar_sticky }} >
+				<nav class="uk-navbar {% if puik.width == 'fluid' %}uk-navbar-attached{% endif %}" data-uk-sticky={{ meta.navbar_sticky }} >
 			{% endif %}
 		{% endif %}
 
 		{% if meta.navbar_source %}
 			{% include meta.navbar_source %}
 		{% else %}
-			{% include uikit.global_navbar_source %} 
+			{% include puik.global_navbar_source %} 
 		{% endif %}
 			
 		</nav>
@@ -73,26 +191,34 @@
 				</div>
 			</div>
 		</div>
-		{% if uikit.width == 'fixed' %}</div>{% endif %}
+		{% if puik.width == 'fixed' %}</div>{% endif %}
 		
 		<br /><br />
 		
-		{% if uikit.width == 'fixed' %}<div class="uk-container uk-container-center">{% endif %}
+		{% if puik.width == 'fixed' %}<div class="uk-container uk-container-center">{% endif %}
 		<div class="uk-grid">
 			{% if meta.sidebar %}
 				{% if meta.sidebar == "None" %}
 					<div class="uk-width-6-6">
-						{% include uikit.global_content_source %}
+						{% if meta.content_source %}
+							{% include meta.content_source %} 
+						{% else %}
+							{% include puik.global_content_source %}
+						{% endif %}
 					</div>
 				{% elseif meta.sidebar == "Right" %}
 					<div class="uk-width-5-6">
-						{% include uikit.global_content_source %}
+						{% if meta.content_source %}
+							{% include meta.content_source %} 
+						{% else %}
+							{% include puik.global_content_source %}
+						{% endif %}
 					</div>
 					<div class="uk-width-1-6">
 						{% if meta.sidebar_source %}
 							{% include meta.sidebar_source %} 
 						{% else %}
-							{% include uikit.global_sidebar_source %}
+							{% include puik.global_sidebar_source %}
 						{% endif %}
 					</div>
 				{% elseif meta.sidebar == "Left" %}
@@ -100,39 +226,47 @@
 						{% if meta.sidebar_source %}
 							{% include meta.sidebar_source %} 
 						{% else %}
-							{% include uikit.global_sidebar_source %}
+							{% if meta.content_source %}
+								{% include meta.content_source %} 
+							{% else %}
+								{% include puik.global_content_source %}
+							{% endif %}
 						{% endif %} 
 					</div>
 					<div class="uk-width-5-6">
-						{% include uikit.global_content_source %}
+						{% if meta.content_source %}
+							{% include meta.content_source %} 
+						{% else %}
+							{% include puik.global_content_source %}
+						{% endif %}
 					</div>
 				{% endif %}
 			{% else %}
-				{% if uikit.global_sidebar == "Left" %}
+				{% if puik.global_sidebar == "Left" %}
 					<div class="uk-width-1-6">
 						{% if meta.sidebar_source %}
 							{% include meta.sidebar_source %} 
 						{% else %}
-							{% include uikit.global_sidebar_source %}
+							{% include puik.global_sidebar_source %}
 						{% endif %} 
 					</div>
 					<div class="uk-width-5-6">
-						{% include uikit.global_content_source %}
+						{% include puik.global_content_source %}
 					</div>
-				{% elseif uikit.global_sidebar == "Right" %}
+				{% elseif puik.global_sidebar == "Right" %}
 					<div class="uk-width-5-6">
-						{% include uikit.global_content_source %}
+						{% include puik.global_content_source %}
 					</div>
 					<div class="uk-width-1-6">
 						{% if meta.sidebar_source %}
 							{% include meta.sidebar_source %} 
 						{% else %}
-							{% include uikit.global_sidebar_source %}
+							{% include puik.global_sidebar_source %}
 						{% endif %} 
 					</div>
 				{% else %}
 					<div class="uk-width-6-6">
-						{% include uikit.global_content_source %}
+						{% include puik.global_content_source %}
 					</div>
 				{% endif %}
 			{% endif %}
@@ -140,14 +274,14 @@
 			
 
 		</div>
-		{% if uikit.width == 'fixed' %}</div>{% endif %}<!--end div for else statement-->
+		{% if puik.width == 'fixed' %}</div>{% endif %}<!--end div for else statement-->
 		
 		<br /><br />
 		
 		{% if meta.footbar_source %}
 			{% include meta.footbar_source %}
 		{% else %}
-			{% include uikit.global_footer_source %}
+			{% include puik.global_footer_source %}
 		{% endif %}
 		
 		
