@@ -22,11 +22,11 @@ Copy the pico_uikit.php file into the plugin folder and uikit folder into the th
 
 There's plenty of configuration options that can be set in the config.php file.
 
-<pre><code>$config['uikit_plugin']['width'] = 'fixed';
-$config['uikit_plugin']['style'] = 'almost-flat';
-$config['uikit_plugin']['global_navbar_sticky'] = 'Yes'; 
-$config['uikit_plugin']['global_sidebar'] = 'Right';
-$config['uikit_plugin']['global_sidebar_source'] = 'layout/main_sidebar.html';</code></pre>
+<pre><code>$config['puik']['width'] = 'fixed';
+$config['puik']['style'] = 'almost-flat';
+$config['puik']['global_navbar_sticky'] = 'Yes'; 
+$config['puik']['global_sidebar'] = 'Right';
+$config['puik']['global_sidebar_source'] = 'layout/main_sidebar.html';</code></pre>
  * <strong>width</strong> - Can be fixed or fluid. 
  * <strong>style</strong> - Can be 'almost-flat' or 'gradient'
  * <strong>global_stickybar</strong> - Sets whether the top navbar is sticky or not, with offset, for example "{top:100}".
